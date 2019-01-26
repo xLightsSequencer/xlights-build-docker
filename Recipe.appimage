@@ -1,0 +1,68 @@
+#!/bin/bash
+./Recipe
+export BASEDIR=/xLights
+cd ${BASEDIR}/xlights-git
+APP=xLights
+COMMIT=`git log --pretty=format:'%h' -n 1`
+VERS=`grep "define Year" xLights_4_64bit.iss | cut -f 3 -d" "`.`grep "define Version" xLights_4_64bit.iss | cut -f 3 -d" "`
+if [ "$1" = "release" ]
+then VERSION=${VERS}
+else VERSION=${VERS}-${COMMIT}
+fi
+
+rm -rf ${BASEDIR}/$APP/
+mkdir ${BASEDIR}/$APP/
+make install DESTDIR=${BASEDIR}/$APP/$APP.AppDir PREFIX=/usr
+
+########################################################################
+# Build complete
+# Now creating the AppDir
+########################################################################
+
+cd ${BASEDIR}/$APP/
+
+wget -q https://raw.githubusercontent.com/AppImage/AppImages/master/functions.sh -O ./functions.sh
+. ./functions.sh
+
+cd ${BASEDIR}/$APP/$APP.AppDir
+
+cp usr/share/icons/hicolor/256x256/apps/xlights.png .
+cp usr/share/icons/hicolor/256x256/apps/xschedule.png .
+
+wget -O AppRun https://github.com/darealshinji/AppImageKit-checkrt/releases/download/continuous/AppRun-patched-x86_64
+chmod +x AppRun
+
+cp ./usr/share/applications/xlights.desktop .
+
+export LD_LIBRARY_PATH=./usr/lib/:$LD_LIBRARY_PATH
+
+copy_deps ; copy_deps ; copy_deps # Three runs to ensure we catch indirect ones
+move_lib
+mv usr/lib/x86_64-linux-gnu/pulseaudio/* usr/lib/x86_64-linux-gnu
+rm usr/lib/x86_64-linux-gnu/libharfbuzz.*
+rm usr/lib/x86_64-linux-gnu/libfreetype.*
+mkdir -p usr/optional/libstdc++
+cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6 usr/optional/libstdc++/
+delete_blacklisted
+
+strip usr/lib/* usr/lib/*/* || true
+
+get_desktopintegration xlights
+
+cd ..
+
+########################################################################
+# AppDir complete
+# Now packaging it as an AppImage
+########################################################################
+
+if [[ ! $(cat /proc/1/sched | head -n 1 | grep init) ]]; then {
+    echo in docker
+    DOCKER_BUILD="yes"
+} fi
+
+generate_type2_appimage
+
+#wget -O bintray.sh https://raw.githubusercontent.com/probonopd/AppImages/master/bintray.sh
+#. ./bintray.sh /xLights/out/xL*AppImage
+
