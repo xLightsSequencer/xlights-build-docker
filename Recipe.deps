@@ -1,5 +1,5 @@
 apt-get update
-apt-get install -y --force-yes g++ gcc build-essential libgtk2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev freeglut3-dev libavcodec-dev libavformat-dev libswscale-dev libsdl2-dev libswresample-dev liblog4cpp5-dev libavutil-dev libavresample-dev libportmidi-dev wget git fuse gpgv colormake libzstd-dev
+apt-get install -y --force-yes g++ gcc build-essential libgtk2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev freeglut3-dev libavcodec-dev libavformat-dev libswscale-dev libsdl2-dev libswresample-dev liblog4cpp5-dev libavutil-dev libavresample-dev libportmidi-dev wget git fuse gpgv colormake libzstd-dev libcurl4-openssl-dev
 apt-get clean
 
 # Build wxwidgets
