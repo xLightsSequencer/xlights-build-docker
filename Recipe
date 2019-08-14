@@ -5,4 +5,4 @@ cd ${BASEDIR}
 git clone https://github.com/smeighan/xLights.git --depth 1 xlights-git
 cd ${BASEDIR}/xlights-git
 git pull
-colormake-short -j2
+colormake-short -j`nproc`
