@@ -4,7 +4,7 @@ export BASEDIR=/xLights
 cd ${BASEDIR}/xlights-git
 APP=xLights
 COMMIT=`git log --pretty=format:'%h' -n 1`
-VERSION=`grep "define Year" xLights_4_64bit.iss | cut -f 3 -d" "`.`grep "define Version" xLights_4_64bit.iss | cut -f 3 -d" "`
+VERSION=`grep "^20" README.txt|head -1|cut -f1 -d" "`
 
 rm -rf ${BASEDIR}/$APP/
 mkdir ${BASEDIR}/$APP/
