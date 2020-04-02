@@ -18,7 +18,9 @@ make install DESTDIR=${BASEDIR}/$APP/$APP.AppDir PREFIX=/usr
 cd ${BASEDIR}/$APP/
 
 wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+wget https://raw.githubusercontent.com/linuxdeploy/linuxdeploy-plugin-gtk/master/linuxdeploy-plugin-gtk.sh
 chmod +x linuxdeploy-x86_64.AppImage
-./linuxdeploy-x86_64.AppImage --appimage-extract-and-run --appdir=${BASEDIR}/$APP/xLights.AppDir/ -o appimage --desktop-file=${BASEDIR}/$APP/xLights.AppDir/usr/share/applications/xlights.desktop --icon-file=${BASEDIR}/$APP/xLights.AppDir/usr/share/icons/hicolor/256x256/apps/xlights.png
+chmod +x linuxdeploy-plugin-gtk.sh
+./linuxdeploy-x86_64.AppImage --appimage-extract-and-run --appdir=${BASEDIR}/$APP/xLights.AppDir/ -o appimage --desktop-file=${BASEDIR}/$APP/xLights.AppDir/usr/share/applications/xlights.desktop --icon-file=${BASEDIR}/$APP/xLights.AppDir/usr/share/icons/hicolor/256x256/apps/xlights.png --plugin gtk
 mkdir AppImage
 mv xLights*.AppImage AppImage/xLights-$VERSION-x86_64.AppImage
