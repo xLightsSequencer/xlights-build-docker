@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM ubuntu:bionic
 
 ADD Recipe.deps /Recipe.deps
 ADD Recipe.appimage /Recipe.appimage
