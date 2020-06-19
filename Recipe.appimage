@@ -2,6 +2,7 @@
 ./Recipe
 export BASEDIR=/xLights
 cd ${BASEDIR}/xlights-git
+if [ ! -e ${BASEDIR}/xlights-git/bin/xSMSDaemon.so ]; then echo "** Build Failed **"; exit; fi
 APP=xLights
 COMMIT=`git log --pretty=format:'%h' -n 1`
 VERSION=`grep "^20" README.txt|head -1|cut -f1 -d" "`
