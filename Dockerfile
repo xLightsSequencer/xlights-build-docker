@@ -5,18 +5,16 @@ RUN apt-get update && apt-get install -y --force-yes g++ gcc build-essential lib
 
 # Build wxwidgets
 RUN cd / && \
-    wget -c https://github.com/wxWidgets/wxWidgets/releases/download/v3.1.3/wxWidgets-3.1.3.tar.bz2 && \
-    tar xfj wxWidgets-3.1.3.tar.bz2 && \
+    git clone --depth=1 --shallow-submodules  --recurse-submodules -b xlights_2020.29 https://github.com/dkulp/wxWidgets wxWidgets-202029 && \
     wget https://raw.githubusercontent.com/smeighan/xLights/master/lib/linux/wxwidgets-31.patch && \
-    rm wxWidgets-3.1.3.tar.bz2 && \
-    cd wxWidgets-3.1.3 && \
+    cd wxWidgets-202029 && \
     patch -p1 < ../wxwidgets-31.patch && \
     rm ../wxwidgets-31.patch && \
-    CXXFLAGS="-std=gnu++14" ./configure --enable-cxx11 --enable-std_containers --enable-std_string --enable-std_string_conv_in_wxstring --enable-backtrace --enable-exceptions --enable-mediactrl --enable-graphics_ctx --enable-shared --disable-gtktest --disable-sdltest --with-gtk=3 --disable-pcx --disable-iff --without-libtiff --prefix=/usr && \
+    ./configure --with-cxx=17 --enable-std_containers --enable-std_string --enable-std_string_conv_in_wxstring --enable-backtrace --enable-exceptions --enable-mediactrl --enable-graphics_ctx --enable-shared --disable-gtktest --disable-sdltest --with-gtk=3 --disable-pcx --disable-iff --without-libtiff --prefix=/usr && \
     make -j 4 && \
     make install PREFIX=/usr && \
     cd .. && \
-    rm -rf wxWidgets-3.1.3
+    rm -rf wxWidgets-202029
 
 # Build log4cpp
 RUN cd / && \
