@@ -5,16 +5,16 @@ RUN apt-get update && apt-get install -y --force-yes g++ gcc build-essential lib
 
 # Build wxwidgets
 RUN cd / && \
-    git clone --depth=1 --shallow-submodules  --recurse-submodules -b xlights_2020.29 https://github.com/dkulp/wxWidgets wxWidgets-202029 && \
+    git clone --depth=1 --shallow-submodules  --recurse-submodules -b xlights_2020.30 https://github.com/dkulp/wxWidgets wxWidgets-202030 && \
     wget https://raw.githubusercontent.com/smeighan/xLights/master/lib/linux/wxwidgets-31.patch && \
-    cd wxWidgets-202029 && \
+    cd wxWidgets-202030 && \
     patch -p1 < ../wxwidgets-31.patch && \
     rm ../wxwidgets-31.patch && \
     ./configure --with-cxx=17 --enable-std_containers --enable-std_string --enable-std_string_conv_in_wxstring --enable-backtrace --enable-exceptions --enable-mediactrl --enable-graphics_ctx --enable-shared --disable-gtktest --disable-sdltest --with-gtk=3 --disable-pcx --disable-iff --without-libtiff --prefix=/usr && \
     make -j 4 && \
     make install PREFIX=/usr && \
     cd .. && \
-    rm -rf wxWidgets-202029
+    rm -rf wxWidgets-202030
 
 # Build log4cpp
 RUN cd / && \
