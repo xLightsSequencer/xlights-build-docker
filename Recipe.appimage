@@ -1,5 +1,7 @@
 #!/bin/bash
 ./Recipe
+ERR=$?
+if [ $ERR -ne 0 ];then exit $ERR;fi
 export BASEDIR=/xLights
 cd ${BASEDIR}/xlights-git
 if [ ! -e ${BASEDIR}/xlights-git/bin/xSMSDaemon.so ]; then echo "** Build Failed **"; exit; fi
