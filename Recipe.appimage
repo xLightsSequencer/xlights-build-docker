@@ -19,6 +19,7 @@ make install DESTDIR=${BASEDIR}/$APP/$APP.AppDir PREFIX=/usr
 ########################################################################
 
 cd ${BASEDIR}/$APP/
+rm ${BASEDIR}/$APP/xLights.AppDir/usr/share/applications/x[cfs]*desktop #remove unneeded .desktop files
 
 wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
 wget https://raw.githubusercontent.com/linuxdeploy/linuxdeploy-plugin-gtk/master/linuxdeploy-plugin-gtk.sh
