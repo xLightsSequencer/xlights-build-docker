@@ -1,20 +1,20 @@
 ARG ARCH=
 FROM ${ARCH}ubuntu:bionic
 
-RUN apt-get update && apt-get install -y --force-yes g++ gcc build-essential libgtk-3-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev freeglut3-dev libavcodec-dev libavformat-dev libswscale-dev libsdl2-dev libswresample-dev libavutil-dev libavresample-dev libportmidi-dev libzstd-dev libcurl4-openssl-dev wget git fuse gpgv colormake libltc-dev librsvg2-dev cbp2make && apt-get clean
+RUN apt-get update && apt-get install -y --force-yes g++ gcc build-essential libgtk-3-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev freeglut3-dev libavcodec-dev libavformat-dev libswscale-dev libsdl2-dev libswresample-dev libavutil-dev libavresample-dev libportmidi-dev libzstd-dev libcurl4-openssl-dev wget git fuse gpgv colormake libltc-dev librsvg2-dev cbp2make patchelf && apt-get clean
 
 # Build wxwidgets
 RUN cd / && \
-    git clone --depth=1 --shallow-submodules  --recurse-submodules -b xlights_2020.29 https://github.com/dkulp/wxWidgets wxWidgets-202029 && \
+    git clone --depth=1 --shallow-submodules  --recurse-submodules -b xlights_2020.56b https://github.com/dkulp/wxWidgets wxWidgets-202056b && \
     wget https://raw.githubusercontent.com/smeighan/xLights/master/lib/linux/wxwidgets-31.patch && \
-    cd wxWidgets-202029 && \
+    cd wxWidgets-202056b && \
     patch -p1 < ../wxwidgets-31.patch && \
     rm ../wxwidgets-31.patch && \
     ./configure --with-cxx=17 --enable-std_containers --enable-std_string --enable-std_string_conv_in_wxstring --enable-backtrace --enable-exceptions --enable-mediactrl --enable-graphics_ctx --enable-shared --disable-gtktest --disable-sdltest --with-gtk=3 --disable-pcx --disable-iff --without-libtiff --prefix=/usr && \
     make -j 4 && \
     make install PREFIX=/usr && \
     cd .. && \
-    rm -rf wxWidgets-202029
+    rm -rf wxWidgets-202056b
 
 # Build log4cpp
 RUN cd / && \
