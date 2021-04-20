@@ -5,13 +5,13 @@ RUN apt-get update && apt-get install -y --force-yes g++ gcc build-essential lib
 
 # Build wxwidgets
 RUN cd / && \
-    git clone --depth=1 --shallow-submodules  --recurse-submodules -b xlights_2021.11 https://github.com/xLightsSequencer/wxWidgets wxWidgets-2021.11 && \
-    cd wxWidgets-2021.11 && \
+    git clone --depth=1 --shallow-submodules  --recurse-submodules -b xlights_2021.13 https://github.com/xLightsSequencer/wxWidgets wxWidgets-2021.13 && \
+    cd wxWidgets-2021.13 && \
     ./configure --with-cxx=17 --enable-std_containers --enable-std_string --enable-std_string_conv_in_wxstring --enable-backtrace --enable-exceptions --enable-mediactrl --enable-graphics_ctx --enable-shared --disable-gtktest --disable-sdltest --with-gtk=3 --disable-pcx --disable-iff --without-libtiff --prefix=/usr && \
     make -j 4 && \
     make install PREFIX=/usr && \
     cd .. && \
-    rm -rf wxWidgets-2021.11
+    rm -rf wxWidgets-2021.13
 
 # Build log4cpp
 RUN cd / && \
