@@ -2,7 +2,7 @@
 export BASEDIR=/xLights
 mkdir ${BASEDIR}
 cd ${BASEDIR}
-git clone https://github.com/smeighan/xLights.git --recurse-submodules --depth 1 xlights-git
+git clone https://github.com/smeighan/xLights.git --recurse-submodules xlights-git
 cd ${BASEDIR}/xlights-git
 git pull
 colormake-short -j`nproc`
