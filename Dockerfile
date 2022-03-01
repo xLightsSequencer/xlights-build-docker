@@ -1,7 +1,9 @@
 ARG ARCH=
-FROM ${ARCH}ubuntu:bionic
+FROM ${ARCH}ubuntu:focal
 
-RUN apt-get update && apt-get install -y --force-yes g++ gcc build-essential libgtk-3-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev freeglut3-dev libavcodec-dev libavformat-dev libswscale-dev libsdl2-dev libswresample-dev libavutil-dev libavresample-dev libportmidi-dev libzstd-dev libcurl4-openssl-dev wget git fuse gpgv colormake libltc-dev librsvg2-dev liblua5.3-dev cbp2make patchelf && apt-get clean
+RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get update
+RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y --force-yes g++ gcc build-essential libgtk-3-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev freeglut3-dev libavcodec-dev libavformat-dev libswscale-dev libsdl2-dev libswresample-dev libavutil-dev libavresample-dev libportmidi-dev libzstd-dev libcurl4-openssl-dev wget git fuse gpgv colormake libltc-dev librsvg2-dev liblua5.3-dev cbp2make patchelf
+RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get clean
 
 # Build wxwidgets
 RUN cd / && \
