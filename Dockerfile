@@ -7,8 +7,8 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get clean
 
 # Build wxwidgets
 RUN cd / && \
-    git clone --depth=1 --shallow-submodules  --recurse-submodules -b xlights_2022.09 https://github.com/xLightsSequencer/wxWidgets xlights_2022.09 && \
-    cd xlights_2022.09 && \
+    git clone --depth=1 --shallow-submodules  --recurse-submodules -b xlights_2023.07 https://github.com/xLightsSequencer/wxWidgets xlights_2023.07 && \
+    cd xlights_2023.07 && \
     ./configure --with-cxx=17 --enable-std_containers --enable-std_string --enable-std_string_conv_in_wxstring --enable-backtrace --enable-exceptions --enable-mediactrl --enable-graphics_ctx --enable-shared --disable-gtktest --disable-sdltest --with-gtk=3 --disable-pcx --disable-iff --without-libtiff --prefix=/usr && \
     make -j 4 && \
     make install PREFIX=/usr && \
