@@ -2,7 +2,7 @@ ARG ARCH=
 FROM ${ARCH}ubuntu:jammy
 
 RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get update
-RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y --force-yes g++ gcc build-essential libgtk-3-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev freeglut3-dev libavcodec-dev libavformat-dev libswscale-dev libsdl2-dev libavutil-dev libportmidi-dev libzstd-dev libcurl4-openssl-dev wget git fuse gpgv colormake libltc-dev librsvg2-dev liblua5.3-dev libwebp-dev cbp2make patchelf
+RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y --force-yes g++ gcc build-essential libgtk-3-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev freeglut3-dev libavcodec-dev libavformat-dev libswscale-dev libsdl2-dev libavutil-dev libportmidi-dev libzstd-dev libcurl4-openssl-dev wget git fuse gpgv colormake libltc-dev librsvg2-dev liblua5.3-dev libwebp-dev cbp2make patchelf curl
 RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get clean
 
 # Build wxwidgets
@@ -17,9 +17,9 @@ RUN cd / && \
 
 # Build log4cpp
 RUN cd / && \
-    wget -c https://nchc.dl.sourceforge.net/project/log4cpp/log4cpp-1.1.x%20%28new%29/log4cpp-1.1/log4cpp-1.1.3.tar.gz && \
-    tar xfz log4cpp-1.1.3.tar.gz && \
-    rm log4cpp-1.1.3.tar.gz && \
+    wget -c https://nchc.dl.sourceforge.net/project/log4cpp/log4cpp-1.1.x%20%28new%29/log4cpp-1.1/log4cpp-1.1.4.tar.gz && \
+    tar xfz log4cpp-1.1.4.tar.gz && \
+    rm log4cpp-1.1.4.tar.gz && \
     cd log4cpp && \
     ./configure --prefix=/usr && \
     make -j 4 && \
