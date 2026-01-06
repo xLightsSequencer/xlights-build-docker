@@ -19,7 +19,7 @@ RUN cd / && \
 
 # Build log4cpp
 RUN cd / && \
-    wget -c https://nchc.dl.sourceforge.net/project/log4cpp/log4cpp-1.1.x%20%28new%29/log4cpp-1.1/log4cpp-1.1.4.tar.gz && \
+    wget -c https://downloads.sourceforge.net/project/log4cpp/log4cpp-1.1.x%20%28new%29/log4cpp-1.1/log4cpp-1.1.4.tar.gz && \
     tar xfz log4cpp-1.1.4.tar.gz && \
     rm log4cpp-1.1.4.tar.gz && \
     cd log4cpp && \
