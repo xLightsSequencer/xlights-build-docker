@@ -1,5 +1,5 @@
 ARG ARCH=
-FROM ${ARCH}ubuntu:jammy
+FROM ${ARCH}ubuntu:noble
 
 RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get update
 RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y --force-yes g++ gcc build-essential wget curl git fuse colormake cbp2make patchelf gpgv
