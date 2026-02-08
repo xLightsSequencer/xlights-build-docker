@@ -9,13 +9,13 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get clean
 
 # Build wxwidgets
 RUN cd / && \
-    git clone --depth=1 --shallow-submodules  --recurse-submodules -b xlights_2026.01 https://github.com/xLightsSequencer/wxWidgets xlights_2026.01 && \
-    cd xlights_2026.01 && \
+    git clone --depth=1 --shallow-submodules  --recurse-submodules -b xlights_2026.02 https://github.com/xLightsSequencer/wxWidgets xlights_2026.02 && \
+    cd xlights_2026.02 && \
     ./configure --with-cxx=17 --enable-std_containers --enable-std_string_conv_in_wxstring --enable-backtrace --enable-exceptions --enable-mediactrl --enable-graphics_ctx --enable-shared --disable-sdltest --with-gtk=3 --enable-glcanvasegl --disable-pcx --disable-iff --without-libtiff --prefix=/usr && \
     make -j 4 && \
     make install PREFIX=/usr && \
     cd .. && \
-    rm -rf xlights_2026.01
+    rm -rf xlights_2026.02
 
 # Build log4cpp
 RUN cd / && \
