@@ -1,0 +1,8 @@
+#!/bin/bash
+export BASEDIR=/xScanner
+mkdir ${BASEDIR}
+cd ${BASEDIR}
+git clone https://github.com/xLightsSequencer/xScanner.git --recurse-submodules xscanner-git
+cd ${BASEDIR}/xscanner-git
+git pull
+colormake-short -j`nproc`

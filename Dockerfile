@@ -31,3 +31,11 @@ RUN cd / && \
 
 ADD Recipe.appimage /Recipe.appimage
 ADD Recipe /Recipe
+ADD Recipe.xFade /Recipe.xFade
+ADD Recipe.xFade.appimage /Recipe.xFade.appimage
+ADD Recipe.xCapture /Recipe.xCapture
+ADD Recipe.xCapture.appimage /Recipe.xCapture.appimage
+ADD Recipe.xScanner /Recipe.xScanner
+ADD Recipe.xScanner.appimage /Recipe.xScanner.appimage
+ADD Recipe.xSchedule /Recipe.xSchedule
+ADD Recipe.xSchedule.appimage /Recipe.xSchedule.appimage

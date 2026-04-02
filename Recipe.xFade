@@ -1,0 +1,8 @@
+#!/bin/bash
+export BASEDIR=/xFade
+mkdir ${BASEDIR}
+cd ${BASEDIR}
+git clone https://github.com/xLightsSequencer/xFade.git --recurse-submodules xfade-git
+cd ${BASEDIR}/xfade-git
+git pull
+colormake-short -j`nproc`
