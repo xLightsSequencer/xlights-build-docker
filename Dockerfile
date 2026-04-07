@@ -7,7 +7,20 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get update
 RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y --force-yes libgtk-3-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev freeglut3-dev libavcodec-dev libavformat-dev libswscale-dev libsdl2-dev libavutil-dev libportmidi-dev libzstd-dev libcurl4-openssl-dev  libltc-dev librsvg2-dev liblua5.3-dev libwebp-dev  libsecret-1-dev
 RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get clean
 
-# Build wxwidgets
+# Install ISPC
+ARG ISPC_VERSION=1.30.0
+RUN ISPC_ARCH=$(uname -m) && \
+    if [ "$ISPC_ARCH" = "aarch64" ]; then \
+        ISPC_URL="https://github.com/ispc/ispc/releases/download/v${ISPC_VERSION}/ispc-v${ISPC_VERSION}-linux.aarch64.tar.gz"; \
+    else \
+        ISPC_URL="https://github.com/ispc/ispc/releases/download/v${ISPC_VERSION}/ispc-v${ISPC_VERSION}-linux.tar.gz"; \
+    fi && \
+    curl -L -o /tmp/ispc.tar.gz "$ISPC_URL" && \
+    tar -xzf /tmp/ispc.tar.gz -C /tmp && \
+    cp /tmp/ispc-v${ISPC_VERSION}-linux*/bin/ispc /usr/local/bin/ispc && \
+    rm -rf /tmp/ispc* && \
+    echo "${ISPC_VERSION}" > /etc/ispc_version
+
 ARG WXWIDGETS_TAG=xlights_2026.04
 RUN cd / && \
     git clone --depth=1 --shallow-submodules  --recurse-submodules -b ${WXWIDGETS_TAG} https://github.com/xLightsSequencer/wxWidgets ${WXWIDGETS_TAG} && \
