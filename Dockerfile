@@ -8,14 +8,16 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y --force-yes lib
 RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get clean
 
 # Build wxwidgets
+ARG WXWIDGETS_TAG=xlights_2026.04
 RUN cd / && \
-    git clone --depth=1 --shallow-submodules  --recurse-submodules -b xlights_2026.04 https://github.com/xLightsSequencer/wxWidgets xlights_2026.04 && \
-    cd xlights_2026.04 && \
+    git clone --depth=1 --shallow-submodules  --recurse-submodules -b ${WXWIDGETS_TAG} https://github.com/xLightsSequencer/wxWidgets ${WXWIDGETS_TAG} && \
+    cd ${WXWIDGETS_TAG} && \
     ./configure --with-cxx=17 --enable-std_containers --enable-std_string_conv_in_wxstring --enable-backtrace --enable-exceptions --enable-mediactrl --enable-graphics_ctx --enable-shared --disable-sdltest --with-gtk=3 --enable-glcanvasegl --disable-pcx --disable-iff --without-libtiff --enable-utf8 --enable-utf8only --prefix=/usr && \
     make -j 4 && \
     make install PREFIX=/usr && \
     cd .. && \
-    rm -rf xlights_2026.04
+    rm -rf ${WXWIDGETS_TAG} && \
+    echo "${WXWIDGETS_TAG}" > /etc/wxwidgets_tag
 
 # Build log4cpp
 RUN cd / && \
