@@ -1,10 +1,10 @@
 ARG ARCH=
 FROM ${ARCH}ubuntu:noble
 
-RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get update
-RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y --force-yes g++ gcc build-essential wget curl git fuse colormake cbp2make patchelf gpgv
-RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get update
-RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y --force-yes libgtk-3-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev freeglut3-dev libavcodec-dev libavformat-dev libswscale-dev libsdl2-dev libavutil-dev libportmidi-dev libzstd-dev libcurl4-openssl-dev  libltc-dev librsvg2-dev liblua5.3-dev libwebp-dev  libsecret-1-dev libegl-dev
+RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get update && \
+    DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y g++ gcc build-essential wget curl git fuse colormake cbp2make patchelf gpgv
+RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get update && \
+    DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y libgtk-3-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev freeglut3-dev libavcodec-dev libavformat-dev libswscale-dev libsdl2-dev libavutil-dev libportmidi-dev libzstd-dev libcurl4-openssl-dev libltc-dev librsvg2-dev liblua5.3-dev libwebp-dev libsecret-1-dev libegl-dev
 RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get clean
 
 # Install ISPC
