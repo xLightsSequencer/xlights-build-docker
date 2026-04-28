@@ -4,5 +4,11 @@ mkdir ${BASEDIR}
 cd ${BASEDIR}
 git clone https://github.com/xLightsSequencer/xLights.git --recurse-submodules xlights-git
 cd ${BASEDIR}/xlights-git
-git pull
+if [ -n "${XLIGHTS_REF}" ]; then
+    git fetch --tags origin
+    git checkout "${XLIGHTS_REF}"
+    git submodule update --init --recursive
+else
+    git pull
+fi
 colormake-short -j`nproc`

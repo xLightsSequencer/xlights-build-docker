@@ -7,7 +7,11 @@ cd ${BASEDIR}/xlights-git
 if [ ! -e ${BASEDIR}/xlights-git/bin/xLights ]; then echo "** Build Failed **"; exit 1; fi
 APP=xLights
 COMMIT=`git log --pretty=format:'%h' -n 1`
-VERSION=`grep "^20" README.txt|head -1|cut -f1 -d" "`
+if [ -n "${XLIGHTS_VERSION}" ]; then
+    VERSION="${XLIGHTS_VERSION}"
+else
+    VERSION=`grep "^20" README.txt|head -1|cut -f1 -d" "`
+fi
 
 rm -rf ${BASEDIR}/$APP/
 mkdir ${BASEDIR}/$APP/
