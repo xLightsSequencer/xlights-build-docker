@@ -21,7 +21,7 @@ RUN ISPC_ARCH=$(uname -m) && \
     rm -rf /tmp/ispc* && \
     echo "${ISPC_VERSION}" > /etc/ispc_version
 
-ARG WXWIDGETS_TAG=xlights_2026.07
+ARG WXWIDGETS_TAG=xlights_2026.11
 RUN cd / && \
     git clone --depth=1 --shallow-submodules  --recurse-submodules -b ${WXWIDGETS_TAG} https://github.com/xLightsSequencer/wxWidgets ${WXWIDGETS_TAG} && \
     cd ${WXWIDGETS_TAG} && \
