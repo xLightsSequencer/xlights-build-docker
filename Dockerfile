@@ -8,7 +8,7 @@ RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get update && \
 RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get clean
 
 # Install ISPC
-ARG ISPC_VERSION=1.30.0
+ARG ISPC_VERSION=1.31.0
 RUN ISPC_ARCH=$(uname -m) && \
     if [ "$ISPC_ARCH" = "aarch64" ]; then \
         ISPC_URL="https://github.com/ispc/ispc/releases/download/v${ISPC_VERSION}/ispc-v${ISPC_VERSION}-linux.aarch64.tar.gz"; \
@@ -21,7 +21,7 @@ RUN ISPC_ARCH=$(uname -m) && \
     rm -rf /tmp/ispc* && \
     echo "${ISPC_VERSION}" > /etc/ispc_version
 
-ARG WXWIDGETS_TAG=xlights_2026.11
+ARG WXWIDGETS_TAG=xlights_2026.13
 RUN cd / && \
     git clone --depth=1 --shallow-submodules  --recurse-submodules -b ${WXWIDGETS_TAG} https://github.com/xLightsSequencer/wxWidgets ${WXWIDGETS_TAG} && \
     cd ${WXWIDGETS_TAG} && \
