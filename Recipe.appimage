@@ -25,6 +25,21 @@ make install DESTDIR=${BASEDIR}/$APP/$APP.AppDir PREFIX=/usr
 cd ${BASEDIR}/$APP/
 rm ${BASEDIR}/$APP/xLights.AppDir/usr/share/applications/x[cfs]*desktop #remove unneeded .desktop files
 
+# The scan library ships one small FFmpeg companion per major (6/7/8) so a
+# single build can run on distros that disagree about which one they have; it
+# loads whichever matches at runtime.  An AppImage bundles its own FFmpeg, so
+# only the companion matching that copy can ever load - but linuxdeploy walks
+# every ELF in the AppDir and fails on the ones it cannot resolve.  Drop those
+# before it looks.  Resolvability is tested rather than assumed so this keeps
+# working when the base image's FFmpeg moves.
+for shim in ${BASEDIR}/$APP/$APP.AppDir/usr/lib/libklightmapper_av*.so; do
+    [ -e "$shim" ] || continue
+    if ldd "$shim" 2>/dev/null | grep -q "not found"; then
+        echo "Recipe.appimage: dropping $(basename $shim) - no matching FFmpeg here"
+        rm -f "$shim"
+    fi
+done
+
 wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
 wget https://raw.githubusercontent.com/linuxdeploy/linuxdeploy-plugin-gtk/master/linuxdeploy-plugin-gtk.sh
 chmod +x linuxdeploy-x86_64.AppImage
